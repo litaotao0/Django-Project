@@ -25,6 +25,15 @@ class AcGameMenu {
                 </div>
             </div>
         </div>
+        <div class="profile">
+            <a href="" class="profile-add">
+                <i class="fa fa-user-plus"></i>
+            </a>
+            <a href="" class="profile-user">
+                <img src="../../static/image/menu/anna.jpg">
+                <p>lidaye <span>#123</span></p>
+            </a>
+        </div>
     </div>
 </div>
 `);
