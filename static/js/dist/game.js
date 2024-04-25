@@ -2,18 +2,28 @@ class AcGameMenu {
     constructor(root) {
         this.root = root;
         this.$menu = $(`
-<div class="ac-game-menu">
-    <div class="ac-game-menu-field">
-        <div class="ac-game-menu-field-item ac-game-menu-field-item-single-mode">
-        单人模式
-        </div>
-        <br>
-        <div class="ac-game-menu-field-item ac-game-menu-field-item-multi-mode">
-        多人模式
-        </div>
-        <br>
-        <div class="ac-game-menu-field-item ac-game-menu-field-item-settings">
-        设置
+<div class="main-menu">
+    <div class="root">
+        <div class="home-page">
+            <div class="left">
+                <a herf="" class="logo">
+                    <img src="../../static/image/menu/overwatch-logo.png">
+                </a>
+                <div class="ac-game-menu">
+                    <div class="ac-game-menu-field">
+                        <a herf="" class="ac-game-menu-field-item-single-mode"><span>单人模式</span></a>
+                        <a herf="" class="ac-game-menu-field-item-multi-mode"><span>多人模式</span></a>
+                        <a herf=""><span>商店</span></a>
+                        <a herf=""><span>战令</span></a>
+                    </div>
+                    <div class="ac-game-menu-field-small">
+                        <a href=""><span>社交互动</span></a>
+                        <a href=""><span>生涯概况</span></a>
+                        <a href="" class="ac-game-menu-field-item-settings"><span>设置</span></a>
+                        <a href=""><span>退出游戏</span></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
