@@ -20,7 +20,7 @@ class AcGameMenu {
                         <a href=""><span>社交互动</span></a>
                         <a href=""><span>生涯概况</span></a>
                         <a href="" class="ac-game-menu-field-item-settings"><span>设置</span></a>
-                        <a href=""><span>退出游戏</span></a>
+                        <a href="" class="ac-game-menu-field-item-logout"><span>退出游戏</span></a>
                     </div>
                 </div>
             </div>
@@ -37,10 +37,12 @@ class AcGameMenu {
     </div>
 </div>
 `);
+        this.$menu.hide();
         this.root.$ac_game.append(this.$menu);
         this.$single_mode = this.$menu.find('.ac-game-menu-field-item-single-mode');
         this.$multi_mode = this.$menu.find('.ac-game-menu-field-item-multi-mode');
         this.$settings = this.$menu.find('.ac-game-menu-field-item-settings');
+        this.$logout = this.$menu.find('.ac-game-menu-field-item-logout');
 
         this.start();
     }
@@ -51,15 +53,18 @@ class AcGameMenu {
 
     add_listening_events() {
         let outer = this;
-        this.$single_mode.click(function(){
+        this.$single_mode.click(function() {
             outer.hide();
             outer.root.playground.show();
         });
-        this.$multi_mode.click(function(){
+        this.$multi_mode.click(function() {
             console.log("click multi mode");
         });
-        this.$settings.click(function(){
+        this.$settings.click(function() {
             console.log("click settings");
+        });
+        this.$logout.click(function() {
+            outer.root.settings.logout_on_remote();
         });
     }
 
