@@ -7,30 +7,30 @@ class AcGameMenu {
         <div class="home-page">
             <div class="left">
                 <a herf="" class="logo">
-                    <img src="../../static/image/menu/overwatch-logo.png">
+                    <img src="https://app6801.acapp.acwing.com.cn/static/image/menu/overwatch-logo.png">
                 </a>
                 <div class="ac-game-menu">
                     <div class="ac-game-menu-field">
-                        <a herf="" class="ac-game-menu-field-item-single-mode"><span>单人模式</span></a>
-                        <a herf="" class="ac-game-menu-field-item-multi-mode"><span>多人模式</span></a>
-                        <a herf=""><span>商店</span></a>
-                        <a herf=""><span>战令</span></a>
+                        <a class="ac-game-menu-field-item-single-mode"><span>单人模式</span></a>
+                        <a class="ac-game-menu-field-item-multi-mode"><span>多人模式</span></a>
+                        <a><span>商店</span></a>
+                        <a><span>战令</span></a>
                     </div>
                     <div class="ac-game-menu-field-small">
-                        <a href=""><span>社交互动</span></a>
-                        <a href=""><span>生涯概况</span></a>
-                        <a href="" class="ac-game-menu-field-item-settings"><span>设置</span></a>
-                        <a href="" class="ac-game-menu-field-item-logout"><span>退出游戏</span></a>
+                        <a><span>社交互动</span></a>
+                        <a><span>生涯概况</span></a>
+                        <a class="ac-game-menu-field-item-settings"><span>设置</span></a>
+                        <a class="ac-game-menu-field-item-logout"><span>退出游戏</span></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="profile">
-            <a href="" class="profile-add">
+            <a class="profile-add">
                 <i class="fa fa-user-plus"></i>
             </a>
-            <a href="" class="profile-user">
-                <img src="../../static/image/menu/anna.jpg">
+            <a class="profile-user">
+                <img src="https://app6801.acapp.acwing.com.cn/static/image/menu/anna.jpg">
                 <p>lidaye <span>#123</span></p>
             </a>
         </div>

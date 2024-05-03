@@ -122,6 +122,8 @@ html, .main-menu, .root, .home-page {
 }
 
 .main-menu {
+    height: 100%;
+    width: 100%;
     font-family: 'Roboto Condensed', sans-serif;
     background-color: #3F51B5;
     background-position: center;
@@ -152,7 +154,7 @@ html, .main-menu, .root, .home-page {
 }
 
 .logo img {
-    width: 100%
+    width: 70%
 }
 
 .ac-game-menu {
@@ -211,7 +213,28 @@ html, .main-menu, .root, .home-page {
 }
 
 .ac-game-menu-field-small a {
+    position: relative;
+    cursor: pointer
+}
 
+.ac-game-menu-field-small a span {
+    position: relative;
+    z-index: 1;
+}
+
+.ac-game-menu-field-small a:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    border-radius: 0 100% 100% 0;
+    background-color: #B0BEC5;
+    left: -30%;
+    top: 40%;
+    z-index: 0;
+    opacity: 0;
+    box-shadow: 1px 0 8px 7px #B0BEC5;
+    transition: opacity .3s, left .3s;
 }
 
 .ac-game-menu a:hover {
