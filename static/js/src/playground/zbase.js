@@ -1,6 +1,7 @@
 class AcGamePlayground {
     constructor(root) {
         this.root = root;
+        this.photo = this.get_random_photo();
         this.$playground = $(`
 <div class="ac-game-playground"></div>
 `);
@@ -13,6 +14,11 @@ class AcGamePlayground {
     get_random_color() {
         let colors = ["blue", "red", "pink", "grey", "green"];
         return colors[Math.floor(Math.random() * 5)];
+    }
+
+    get_random_photo() {
+        let photos = ["https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/76.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/genji.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/mei.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/tracer.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/D.Va.jpg"];
+        return photos[Math.floor(Math.random() * 5)];
     }
 
     start() {

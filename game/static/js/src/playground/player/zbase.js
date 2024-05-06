@@ -25,6 +25,9 @@ class Player extends AcGameObject {
         if (this.is_me) {
             this.img = new Image();
             this.img.src = this.playground.root.settings.photo;
+        } else {
+            this.img_ai = new Image();
+            this.img_ai.src = this.playground.photo;
         }
     }
 
@@ -69,7 +72,7 @@ class Player extends AcGameObject {
         let radius = this.playground.height * 0.01;
         let angle = Math.atan2(ty - this.y, tx - this.x);
         let vx = Math.cos(angle), vy = Math.sin(angle);
-        let color = "orange";
+        let color = this.color;
         let speed = this.playground.height * 0.5;
         let move_length = this.playground.height * 1;
         new FireBall(this.playground, this, x, y, radius, vx, vy, color, speed, move_length, this.playground.height * 0.01);
@@ -155,13 +158,20 @@ class Player extends AcGameObject {
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             this.ctx.stroke();
             this.ctx.clip();
-            this.ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2); 
+            this.ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
             this.ctx.restore();
         } else {
-            this.ctx.beginPath();
+            /* this.ctx.beginPath();
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             this.ctx.fillStyle = this.color;
-            this.ctx.fill();
+            this.ctx.fill(); */
+            this.ctx.save();
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            this.ctx.stroke();
+            this.ctx.clip();
+            this.ctx.drawImage(this.img_ai, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+            this.ctx.restore();
         }
     }
 

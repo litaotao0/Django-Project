@@ -31,7 +31,7 @@ class AcGameMenu {
             </a>
             <a class="profile-user">
                 <img src="https://app6801.acapp.acwing.com.cn/static/image/menu/anna.jpg">
-                <p>lidaye <span>#123</span></p>
+                <p>lidaye <span>#124</span></p>
             </a>
         </div>
     </div>
@@ -216,6 +216,9 @@ class Player extends AcGameObject {
         if (this.is_me) {
             this.img = new Image();
             this.img.src = this.playground.root.settings.photo;
+        } else {
+            this.img_ai = new Image();
+            this.img_ai.src = this.playground.photo;
         }
     }
 
@@ -260,7 +263,7 @@ class Player extends AcGameObject {
         let radius = this.playground.height * 0.01;
         let angle = Math.atan2(ty - this.y, tx - this.x);
         let vx = Math.cos(angle), vy = Math.sin(angle);
-        let color = "orange";
+        let color = this.color;
         let speed = this.playground.height * 0.5;
         let move_length = this.playground.height * 1;
         new FireBall(this.playground, this, x, y, radius, vx, vy, color, speed, move_length, this.playground.height * 0.01);
@@ -346,13 +349,20 @@ class Player extends AcGameObject {
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             this.ctx.stroke();
             this.ctx.clip();
-            this.ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2); 
+            this.ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
             this.ctx.restore();
         } else {
-            this.ctx.beginPath();
+            /* this.ctx.beginPath();
             this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             this.ctx.fillStyle = this.color;
-            this.ctx.fill();
+            this.ctx.fill(); */
+            this.ctx.save();
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            this.ctx.stroke();
+            this.ctx.clip();
+            this.ctx.drawImage(this.img_ai, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+            this.ctx.restore();
         }
     }
 
@@ -436,6 +446,7 @@ class FireBall extends AcGameObject {
 class AcGamePlayground {
     constructor(root) {
         this.root = root;
+        this.photo = this.get_random_photo();
         this.$playground = $(`
 <div class="ac-game-playground"></div>
 `);
@@ -448,6 +459,11 @@ class AcGamePlayground {
     get_random_color() {
         let colors = ["blue", "red", "pink", "grey", "green"];
         return colors[Math.floor(Math.random() * 5)];
+    }
+
+    get_random_photo() {
+        let photos = ["https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/76.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/genji.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/mei.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/tracer.jpg", "https://app6801.acapp.acwing.com.cn/static/image/playground/overwatch-userphoto/D.Va.jpg"];
+        return photos[Math.floor(Math.random() * 5)];
     }
 
     start() {
@@ -581,8 +597,12 @@ class Settings {
     }
 
     start() {
-        this.getinfo();
-        this.add_listening_events();
+        if (this.platform === "ACAPP") {
+            this.getinfo_acapp();
+        } else {
+            this.getinfo_web();
+            this.add_listening_events();
+        }
     }
 
     add_listening_events() {
@@ -708,7 +728,32 @@ class Settings {
 
     }
 
-    getinfo() {
+    acapp_login(appid, redirect_uri, scope, state) {
+        let outer = this;
+        this.root.AcWingOS.api.oauth2.authorize(appid, redirect_uri, scope, state, function(resp) {
+            console.log(resp);
+            if (resp.result === "success") {
+                outer.username = resp.username;
+                outer.photo = resp.photo;
+                outer.hide();
+                outer.root.menu.show();
+            }
+        });
+    }
+
+    getinfo_acapp() {
+        let outer = this;
+        $.ajax({
+            url: "https://app6801.acapp.acwing.com.cn/settings/acwing/acapp/apply_code/",
+            type: "GET",
+            success: function(resp) {
+                if (resp.result === "success") {
+                    outer.acapp_login(resp.appid, resp.redirect_uri, resp.scope, resp.state);
+                }
+            }
+        });
+    }
+    getinfo_web() {
         let outer = this;
         $.ajax({
             url: "https://app6801.acapp.acwing.com.cn/settings/getinfo/",

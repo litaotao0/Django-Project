@@ -31,7 +31,7 @@ class AcGameMenu {
             </a>
             <a class="profile-user">
                 <img src="https://app6801.acapp.acwing.com.cn/static/image/menu/anna.jpg">
-                <p>lidaye <span>#123</span></p>
+                <p>lidaye <span>#124</span></p>
             </a>
         </div>
     </div>
