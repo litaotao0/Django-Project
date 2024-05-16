@@ -30,8 +30,6 @@ class AcGameMenu {
                 <i class="fa fa-user-plus"></i>
             </a>
             <a class="profile-user">
-                <img src="https://app6801.acapp.acwing.com.cn/static/image/menu/anna.jpg">
-                <p>lidaye <span>#124</span></p>
             </a>
         </div>
     </div>
@@ -43,12 +41,14 @@ class AcGameMenu {
         this.$multi_mode = this.$menu.find('.ac-game-menu-field-item-multi-mode');
         this.$settings = this.$menu.find('.ac-game-menu-field-item-settings');
         this.$logout = this.$menu.find('.ac-game-menu-field-item-logout');
+        this.$user = this.$menu.find('.profile-user');
 
         this.start();
     }
 
     start() {
         this.add_listening_events();
+        this.get_info();
     }
 
     add_listening_events() {
@@ -65,6 +65,30 @@ class AcGameMenu {
         });
         this.$logout.click(function() {
             outer.root.settings.logout_on_remote();
+        });
+    }
+
+    render_username(username, photo) {
+        return $(`<a class="profile-user">
+                    <img src="${photo}">
+                    <p>${username}<span></span></p></a>`);
+    }
+
+    get_info() {
+        let outer = this;
+        $.ajax({
+            url: "https://app6801.acapp.acwing.com.cn/settings/getinfo/",
+            type: "GET",
+            data: {
+                platform: outer.root.settings.platform,
+            },
+            success: function(resp) {
+                if (resp.result === "success") {
+                    let username = resp.username;
+                    let photo = resp.photo;
+                    outer.$user.append(outer.render_username(username, photo));
+                }
+            }
         });
     }
 
