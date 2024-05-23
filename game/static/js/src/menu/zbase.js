@@ -48,7 +48,6 @@ class AcGameMenu {
 
     start() {
         this.add_listening_events();
-        this.get_info();
     }
 
     add_listening_events() {
@@ -72,24 +71,6 @@ class AcGameMenu {
         return $(`<a class="profile-user">
                     <img src="${photo}">
                     <p>${username}<span></span></p></a>`);
-    }
-
-    get_info() {
-        let outer = this;
-        $.ajax({
-            url: "https://app6801.acapp.acwing.com.cn/settings/getinfo/",
-            type: "GET",
-            data: {
-                platform: outer.root.settings.platform,
-            },
-            success: function(resp) {
-                if (resp.result === "success") {
-                    let username = resp.username;
-                    let photo = resp.photo;
-                    outer.$user.append(outer.render_username(username, photo));
-                }
-            }
-        });
     }
 
     show() {  //显示menu界面
